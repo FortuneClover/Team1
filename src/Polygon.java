@@ -1,77 +1,55 @@
-import java.util.Scanner;
+// 도형 넓이 계산 클래스: Point를 상속받아 좌표(x,y)를 보유
+public class Polygon extends Point {
 
-public class Main {
-    public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
-        Polygon shape = null;
+    public Polygon(double x, double y) {
+        super(x, y);
+    }
 
-        while (true) {
-            System.out.println("================================");
-            System.out.println("Select Polygon Menu");
-            System.out.println("1. Circle");
-            System.out.println("2. Triangle");
-            System.out.println("3. Square");
-            System.out.println("4. Exit");
-            System.out.println("================================");
-            System.out.print("Select >>>>> ");
+    // 도형 이름으로 분기하여 넓이 계산 (README 문구에 맞춤)
+    // circle : p1=반지름
+    // triangle : p1=밑변, p2=높이
+    // rectangle : p1=가로, p2=세로
+    public double areaByName(String shapeName, double p1, double p2) {
+        if (shapeName == null) throw new IllegalArgumentException("도형 이름이 필요합니다.");
+        switch (shapeName.toLowerCase()) {
+            case "circle":
+                requirePositive(p1, "반지름");
+                return Math.PI * p1 * p1;
 
-            int choice = input.nextInt();
+            case "triangle":
+                requirePositive(p1, "밑변");
+                requirePositive(p2, "높이");
+                return 0.5 * p1 * p2;
 
-            if (choice == 4) {
-                System.out.println("Exiting...");
-                break;
-            }
+            case "rectangle":
+                requirePositive(p1, "가로");
+                requirePositive(p2, "세로");
+                return p1 * p2;
 
-            // 좌표 입력
-            System.out.print("Enter X: ");
-            double x = input.nextDouble();
-            System.out.print("Enter Y: ");
-            double y = input.nextDouble();
-
-            // Polygon 객체 생성
-            shape = new Polygon(x, y);
-
-            double p1 = 0, p2 = 0;
-            String shapeName = "";
-
-            switch (choice) {
-                case 1: // Circle
-                    shapeName = "circle";
-                    System.out.print("Enter radius: ");
-                    p1 = input.nextDouble();
-                    break;
-
-                case 2: // Triangle
-                    shapeName = "triangle";
-                    System.out.print("Enter base: ");
-                    p1 = input.nextDouble();
-                    System.out.print("Enter height: ");
-                    p2 = input.nextDouble();
-                    break;
-
-                case 3: // Square (Rectangle)
-                    shapeName = "rectangle";
-                    System.out.print("Enter width: ");
-                    p1 = input.nextDouble();
-                    System.out.print("Enter height: ");
-                    p2 = input.nextDouble();
-                    break;
-
-                default:
-                    System.out.println("Invalid selection.");
-                    continue;
-            }
-
-            // 넓이 계산
-            try {
-                double area = shape.areaByName(shapeName, p1, p2);
-                System.out.printf("Result: %s area = %.2f (at X: %.1f, Y: %.1f)%n",
-                        shapeName, area, shape.getX(), shape.getY());
-            } catch (Exception e) {
-                System.out.println("Error calculating area: " + e.getMessage());
-            }
+            default:
+                throw new UnsupportedOperationException("지원하지 않는 도형: " + shapeName);
         }
+    }
 
-        input.close();
+    // 각 도형을 메서드로 바로 쓰고 싶으면(오타 방지) 아래 3개도 제공
+    public double Circle(double r) {
+        requirePositive(r, "반지름");
+        return Math.PI * r * r;
+    }
+
+    public double Triangle(double base, double height) {
+        requirePositive(base, "밑변");
+        requirePositive(height, "높이");
+        return 0.5 * base * height;
+    }
+
+    public double Rectangle(double w, double h) {
+        requirePositive(w, "가로");
+        requirePositive(h, "세로");
+        return w * h;
+    }
+
+    private static void requirePositive(double v, String name) {
+        if (v <= 0) throw new IllegalArgumentException(name + "은(는) 양수여야 합니다.");
     }
 }
