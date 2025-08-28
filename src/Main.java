@@ -66,7 +66,7 @@ public class Main {
             try {
                 double area = shape.areaByName(shapeName, p1, p2);
                 System.out.printf("Result: %s area = %.2f (at X: %.1f, Y: %.1f)%n",
-                        shapeName, area, shape.getX(), shape.getY());
+                        shapeName, area, shape.setX(), shape.setY());
             } catch (Exception e) {
                 System.out.println("Error calculating area: " + e.getMessage());
             }
