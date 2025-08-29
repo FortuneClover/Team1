@@ -10,14 +10,14 @@ public class Point implements Pointset {
         this.y = y;
     }
 
-    // Pointget 인터페이스로부터 강제받은 getX() 메서드 구현
+    // Pointset 인터페이스로부터 강제받은 setX() 메서드 구현
     // x 좌표 값을 반환합니다.
     @Override
     public double setX() {
         return this.x;
     }
 
-    // Pointget 인터페이스로부터 강제받은 getY() 메서드 구현
+    // Pointset 인터페이스로부터 강제받은 setY() 메서드 구현
     // y 좌표 값을 반환합니다.
     @Override
     public double setY() {
