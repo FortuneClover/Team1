@@ -16,13 +16,13 @@ x,y 좌표를 이용하여 특정 도형의 넓이 구하기.
 
 ### 2. Point.java (특정 좌표를 획득하고 관리하는 클래스)
 
-Pointget.java로 부터 getX, getY 구현을 강제받아서, 해당 클래스 내부의 x,y의 변수에 값을 받는
-getX, getY를 구현하고, x,y 값을 보유하고있음.
+Pointset.java로 부터 setX, setY 구현을 강제받아서, 해당 클래스 내부의 x,y의 변수에 값을 받는
+setX, setY를 구현하고, x,y 값을 보유하고있음.
 
 ### 3. Polygon.java (도형 넓이 계산 클래스)
 
 Point.java를 상속 받아서, 해당 클래스가 보유하고 있는, 도형 이름(Circle, Triangle etc..)을 이용한
-메소드를 통해 넓이를 구함.
+메소드 혹은 Controller를 통해 연산을 제어함.
 
 
 ## 프로젝트 실행 방법
